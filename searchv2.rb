@@ -22,7 +22,31 @@ require 'open-uri'
 
     doc3 =  doc2.css('#songLyricsDiv')
     
-    doc3.class
+    doc4 = doc3.to_s.split("<br>\n")
+
+    puts doc4
+
+    #doc4.each_slice(6).to_a
+
+    #big_array = []
+    #small_array = []
+    #counter = 1
+    #doc4.each_with_index do |block, index|
+
+     # small_array.push(block)
+    
+      #counter = counter + 1
+    
+      #if counter == 6 || index == doc4.length
+       # big_array.push(small_array)
+        #counter = 1
+        #small_array = []
+      #nd
+    #end    
+
+    #p big_array
+    #p doc4
+
     #p doc4
     #.each do |link|
     #a =  link.content

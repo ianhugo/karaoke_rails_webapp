@@ -10,7 +10,7 @@ class InputsController < ApplicationController
     require 'open-uri'
     #require 'json'
     #lyric search
-    
+     
     the_songtitle = params.fetch(:q_songtitle)
     the_artistname = params.fetch(:qs_artistname)
 
@@ -30,7 +30,10 @@ class InputsController < ApplicationController
     doc2 = Nokogiri::HTML(open("#{result1a}", 'User-Agent' => 'safari'))
     
 
-    @doc3 = doc2.css('#songLyricsDiv')
+    doc3 = doc2.xpath('//*[(@id = "songLyricsDiv")]')
+    #doc2.css('#songLyricsDiv')
+    
+    @doc4 = doc3.to_s.split("<br>\n")
     #puts link.content
     #end
 
