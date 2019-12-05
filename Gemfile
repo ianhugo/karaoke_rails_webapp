@@ -76,3 +76,9 @@ end
 
 gem 'devise'
 gem 'activeadmin', '2.2.0'
+
+gem 'nokogiri'
+gem 'rubysl-open-uri'
+gem 'google-api-client', '~> 0.7.1'
+gem 'optimist'
+gem 'rest-client'

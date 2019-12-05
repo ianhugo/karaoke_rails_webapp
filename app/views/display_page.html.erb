@@ -1,0 +1,38 @@
+<h1> LaLaLa </h1>
+
+<table >
+  <tr>
+    <th>
+      <iframe id="ytplayer" type="text/html" width="640" height="360"
+      src="https://www.youtube.com/embed/<%= @result2 %>?autoplay=1&origin=http://example.com"
+     
+      frameborder="0"></iframe>
+    </th>
+    
+    <th>
+    
+    <%= @doc3 %>
+    
+    
+    </th>
+  </tr>
+  </table>
+
+<div>
+
+<h2> Next Song? </h2>  
+<form action="/search_song" method="post">
+  <div>
+    <label for="Song_title"> Song Title? </label>
+    <input id="Song_title" type="text" name="q_songtitle" placeholder="Title...">
+  </div> 
+
+  <div>
+    <label for="Artist_name"> Artist Name? </label>
+    <input id="Artist_name" type="text" name="qs_artistname" placeholder="Artist...">
+  </div>
+
+  <div>
+    <button> Search </button>
+  </div>
+</form>
