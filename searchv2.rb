@@ -22,9 +22,13 @@ require 'open-uri'
 
     doc3 =  doc2.css('#songLyricsDiv')
     
-    doc4 = doc3.to_s.split("<br>\n")
+    doc4 = doc3.to_s.split("<br>\n").join(",")
 
-    puts doc4
+    doc5 = doc4.gsub!("<p id=\"songLyricsDiv\" class=\"songLyricsV14 iComment-text\">", "")
+    
+    doc6 = doc5.gsub!("<br></p>", "")
+    
+    p doc6
 
     #doc4.each_slice(6).to_a
 

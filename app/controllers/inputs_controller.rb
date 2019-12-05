@@ -30,10 +30,19 @@ class InputsController < ApplicationController
     doc2 = Nokogiri::HTML(open("#{result1a}", 'User-Agent' => 'safari'))
     
 
-    doc3 = doc2.xpath('//*[(@id = "songLyricsDiv")]')
+    #doc3 = doc2.xpath('//*[(@id = "songLyricsDiv")]')
     #doc2.css('#songLyricsDiv')
+    doc3 =  doc2.css('#songLyricsDiv')
     
-    @doc4 = doc3.to_s.split("<br>\n")
+    doc4 = doc3.to_s.split("<br>\n").join(",")
+
+    doc5 = doc4.gsub!("<p id=\"songLyricsDiv\" class=\"songLyricsV14 iComment-text\">", "")
+    
+    @doc6 = doc5.gsub!("<br></p>", "")
+    
+    # @doc4 = doc3.to_s.split("<br>\n").gsub("<p id=\"songLyricsDiv\" class=\"songLyricsV14 iComment-text\">", "")
+    #@doc4  = doca.gsub!("<p id=\"songLyricsDiv\" class=\"songLyricsV14 iComment-text\">", "")
+    #@doc4 = docb.gsub!("<br></p>", "")
     #puts link.content
     #end
 
