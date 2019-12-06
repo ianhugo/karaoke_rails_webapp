@@ -7,15 +7,16 @@ class InputsController < ApplicationController
   def search
     #require 'google/api_client'
     #require 'optimist'
-    require 'open-uri'
     #require 'json'
+    
+    require 'open-uri'
+    
+    
     #lyric search
-     
     the_songtitle = params.fetch(:q_songtitle)
     the_artistname = params.fetch(:qs_artistname)
 
-    #a = the_songtitle.gsub!("\s", "+")
-    #b = the_artistname.gsub!("\s", "+")
+    
     @query_string = the_songtitle + "+" + the_artistname
     
     doc1 = Nokogiri::HTML(open('http://www.songlyrics.com/index.php?section=search&searchW='+ @query_string + '&submit=Search'))
@@ -29,22 +30,38 @@ class InputsController < ApplicationController
     
     doc2 = Nokogiri::HTML(open("#{result1a}", 'User-Agent' => 'safari'))
     
-
-    #doc3 = doc2.xpath('//*[(@id = "songLyricsDiv")]')
-    #doc2.css('#songLyricsDiv')
     doc3 =  doc2.css('#songLyricsDiv')
     
-    doc4 = doc3.to_s.split("<br>\n").join(",")
+    doc4 = doc3.to_s.split("<br>\n").join("\n")
 
     doc5 = doc4.gsub!("<p id=\"songLyricsDiv\" class=\"songLyricsV14 iComment-text\">", "")
     
-    @doc6 = doc5.gsub!("<br></p>", "")
+    doc6 = doc5.gsub!("<br></p>", "")
+
+    doc7 = doc6.split("\n\n")
+
+    @storevalue = '' 
+    doc7.each do |block|
+      @storevalue = @storevalue + '<p>'
+      @storevalue = @storevalue + block
+      @storevalue = @storevalue +'</p>'
+    end
+
+
+    #doc6.each_with_index do |block, index|
+
+    #small_array.push(block)
     
-    # @doc4 = doc3.to_s.split("<br>\n").gsub("<p id=\"songLyricsDiv\" class=\"songLyricsV14 iComment-text\">", "")
-    #@doc4  = doca.gsub!("<p id=\"songLyricsDiv\" class=\"songLyricsV14 iComment-text\">", "")
-    #@doc4 = docb.gsub!("<br></p>", "")
-    #puts link.content
-    #end
+     # counter = counter + 1
+    
+      #if counter == 6 || index == doc4.length
+       # big_array.push(small_array)
+        #counter = 1
+        #small_array = []
+      #nd
+    #end    
+    
+    
 
     #videosearch
 
@@ -66,10 +83,6 @@ class InputsController < ApplicationController
     render ({ :template => "display_page.html.erb"})
 
   end  
-
-  def display
-  
-  end
 
 
 end  
