@@ -27,7 +27,6 @@ class InputsController < ApplicationController
     result1a = result1.to_str
 
    
-    
     doc2 = Nokogiri::HTML(open("#{result1a}", 'User-Agent' => 'safari'))
     
     doc3 =  doc2.css('#songLyricsDiv')
@@ -38,7 +37,10 @@ class InputsController < ApplicationController
     
     doc6 = doc5.gsub!("<br></p>", "")
 
-    doc7 = doc6.split("\n\n")
+    if doc6 == nil
+      @storevalue = "Sorry this song does not have lyrics at the moment. Please try another song :)"
+    else
+      doc7 = doc6.split("\n\n")
 
     @storevalue = '' 
     doc7.each do |block|
@@ -46,7 +48,7 @@ class InputsController < ApplicationController
       @storevalue = @storevalue + block
       @storevalue = @storevalue +'</p>'
     end
-
+    end
 
     #doc6.each_with_index do |block, index|
 
